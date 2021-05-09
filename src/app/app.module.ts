@@ -8,6 +8,7 @@ import { AddArtistComponent } from './components/add-artist/add-artist.component
 import { ArtistDetailsComponent } from './components/artist-details/artist-details.component';
 import { ArtistsListComponent } from './components/artists-list/artists-list.component';
 import { ArtistService } from './services/artist.service';
+import { AddSongComponent } from './components/add-song/add-song.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ArtistService } from './services/artist.service';
     AppComponent,
     AddArtistComponent,
     ArtistDetailsComponent,
-    ArtistsListComponent
+    ArtistsListComponent,
+    AddSongComponent
   ],
   imports: [
     BrowserModule,

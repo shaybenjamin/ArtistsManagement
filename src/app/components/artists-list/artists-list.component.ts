@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ArtistService } from 'src/app/services/artist.service';
 
 @Component({
@@ -9,15 +10,38 @@ import { ArtistService } from 'src/app/services/artist.service';
 export class ArtistsListComponent implements OnInit {
 
   artists: any;
+  songs: any;
   currentArtist = null;
   currentIndex = -1;
   title = '';
 
-  constructor(private artistsService: ArtistService) { }
+  constructor(private artistsService: ArtistService, private router: Router) { }
 
 
   ngOnInit(): void {
     this.refreshList();
+    this.getSongs();
+  }
+
+  addNewSong(artistId) {
+    this.router.navigate(['add-song/' + artistId]);
+  }
+
+  getArtistSongs(artistId) {
+    //alert('ds');
+    console.log('artist' + artistId);
+    let res = this.songs.filter(sng => sng.artistId === artistId);
+    console.log(res);
+    return res;
+  }
+
+  getSongs(): void {
+    this.artistsService.getSongs().then(data => {
+      this.songs = data;
+      console.log(data);
+    }).catch(error => {
+      console.log(error);
+    });
   }
 
   retrieveArtists(): void {

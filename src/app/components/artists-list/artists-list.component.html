@@ -18,8 +18,8 @@
         <td>{{artist.yearOfBirth}}</td>
         <td>{{artist.pictureLink}}</td>
         <!-- <td>{{artist.songs}}</td> -->
-        <td><div *ngFor="let song of artist.songsId;">{{song}}</div></td>
-        <td><span class="pointer text-danger">הוסף שיר</span></td>
+        <td><div *ngFor="let song of getArtistSongs(artist._id);">{{song.name}}</div></td>
+        <td><span class="pointer text-danger" (click)="addNewSong(artist._id)">הוסף שיר</span></td>
         <td><span class="pointer text-danger" (click)="deleteArtist(artist._id)">מחק</span></td>
       </tr>
     </tbody>
