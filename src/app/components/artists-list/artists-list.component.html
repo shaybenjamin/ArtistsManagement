@@ -6,22 +6,31 @@
         <th>Name</th>
         <th>Year Of Birth</th>
         <th>Picture Link</th>
-        <th>Songs</th>
+        <th></th>
         <th></th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let artist of artists; let i = index">
+      <ng-container *ngFor="let artist of artists; let i = index">
+      <tr>
         <td>{{artist._id}}</td>
         <td>{{artist.name}}</td>
         <td>{{artist.yearOfBirth}}</td>
         <td>{{artist.pictureLink}}</td>
         <!-- <td>{{artist.songs}}</td> -->
-        <td><div *ngFor="let song of getArtistSongs(artist._id);">{{song.name}}</div></td>
+        <!-- <td><div *ngFor="let song of getArtistSongs(artist._id);">{{song.name}}</div></td> -->
+        <td><span class="pointer text-danger" (click)="toggleSongs(artist._id)">רשימת השירים</span></td>
         <td><span class="pointer text-danger" (click)="addNewSong(artist._id)">הוסף שיר</span></td>
         <td><span class="pointer text-danger" (click)="deleteArtist(artist._id)">מחק</span></td>
       </tr>
+      <tr [hidden]="artist.songsId.length == 0 || currentArtist !== artist._id">
+        <h2> רשימת השירים</h2>
+        <ul style="direction: ltr;">
+          <li *ngFor="let song of getArtistSongs(artist._id);"><span (click)="deleteSong(song.artistId, song.name)" style="margin-left: 20px;margin-right: 20px;color: blue;cursor: pointer;">מחק</span><span>{{song.name}}</span></li>
+        </ul>
+      </tr>
+    </ng-container>
     </tbody>
 
   </table>

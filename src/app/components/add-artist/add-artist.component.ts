@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ArtistService } from 'src/app/services/artist.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class AddArtistComponent implements OnInit {
 
   submitted = false;
 
-  constructor(private artistService: ArtistService) { }
+  constructor(private artistService: ArtistService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -35,6 +36,7 @@ export class AddArtistComponent implements OnInit {
         response => {
           console.log(response);
           this.submitted = true;
+          this.router.navigate(['artists'])
         },
         error => {
           console.log(error);

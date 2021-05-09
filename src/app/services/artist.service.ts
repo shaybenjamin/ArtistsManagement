@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ArtistModel } from '../models/ArtistModel';
 
 //const baseUrl = 'http://localhost:8081/Artists/';
 const baseUrl = 'http://localhost:3000/artists/';
@@ -12,8 +13,8 @@ export class ArtistService {
 
   constructor(private http: HttpClient) { }
 
-  getArtists(): Promise<any> {
-    return this.http.get(baseUrl+ 'getArtists').toPromise();
+  getArtists(): Promise<ArtistModel[]> {
+    return this.http.get<ArtistModel[]>(baseUrl + 'getArtists').toPromise();
   }
 
   getArtist(artistId): Observable<any> {
@@ -40,7 +41,7 @@ export class ArtistService {
     return this.http.delete(baseUrl + 'deleteArtist/' + artistId).toPromise();
   }
 
-  deleteArtistSong(id): Observable<any> {
-    return this.http.get(baseUrl + 'deleteArtistSong/run/' + id);
+  deleteArtistSong(artistId, songName): Promise<any> {
+    return this.http.delete(baseUrl + 'deleteArtistSong/' + songName + '/' + artistId).toPromise();
   }
 }

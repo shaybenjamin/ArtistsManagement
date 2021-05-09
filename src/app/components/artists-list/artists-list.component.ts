@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ArtistModel } from 'src/app/models/ArtistModel';
 import { ArtistService } from 'src/app/services/artist.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { ArtistService } from 'src/app/services/artist.service';
 })
 export class ArtistsListComponent implements OnInit {
 
-  artists: any;
+  artists: ArtistModel[];
   songs: any;
   currentArtist = null;
   currentIndex = -1;
@@ -20,7 +21,7 @@ export class ArtistsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshList();
-    this.getSongs();
+
   }
 
   addNewSong(artistId) {
@@ -33,6 +34,13 @@ export class ArtistsListComponent implements OnInit {
     let res = this.songs.filter(sng => sng.artistId === artistId);
     console.log(res);
     return res;
+  }
+
+  toggleSongs(artistId) {
+    if (this.currentArtist === artistId)
+      this.currentArtist = null;
+    else
+      this.currentArtist = artistId;
   }
 
   getSongs(): void {
@@ -55,6 +63,7 @@ export class ArtistsListComponent implements OnInit {
 
   refreshList(): void {
     this.retrieveArtists();
+    this.getSongs();
     this.currentArtist = null;
     this.currentIndex = -1;
   }
@@ -68,13 +77,23 @@ deleteArtist(id): void {
   const self = this;
     this.artistsService.deleteArtist(id).then(response => {
       console.log(response);
-      self.retrieveArtists();
+      self.refreshList();
     }).catch(error => {
       console.log(error);
-      self.retrieveArtists();
+      self.refreshList();
     });
 }
 
+  deleteSong(id, songName) {
+    const self = this;
+    this.artistsService.deleteArtistSong(id, songName).then(response => {
+      console.log(response);
+      self.refreshList();
+    }).catch(error => {
+      console.log(error);
+      self.refreshList();
+    });
+  }
   // removeAllArtists(): void {
   //   const self = this;
   //   this.artistsService.deleteArtist(self.currentArtist.id)
