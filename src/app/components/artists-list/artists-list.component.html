@@ -1,0 +1,78 @@
+
+<table class="table" >
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Year Of Birth</th>
+        <th>Picture Link</th>
+        <th>Songs</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let artist of artists; let i = index">
+        <td>{{artist._id}}</td>
+        <td>{{artist.name}}</td>
+        <td>{{artist.yearOfBirth}}</td>
+        <td>{{artist.pictureLink}}</td>
+        <!-- <td>{{artist.songs}}</td> -->
+        <td><div *ngFor="let song of artist.songsId;">{{song}}</div></td>
+        <td><span class="pointer text-danger">הוסף שיר</span></td>
+        <td><span class="pointer text-danger" (click)="deleteArtist(artist._id)">מחק</span></td>
+      </tr>
+    </tbody>
+
+  </table>
+
+
+<!-- 
+
+<div class="list row">
+    <div class="col-md-6">
+      <h4>Artists List</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let artist of artists; let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActiveArtist(artist, i)">
+          <div class="artist-details">
+            <span> Name - {{ artist.name }} year-of-birth - {{artist.yearOfBirth}}  picture-link - {{artist.pictureLink}}</span>
+            <span> מחק </span>
+            <span> הוסף שיר </span>
+          </div>
+        </li>
+      </ul>
+  
+      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllArtists()">
+        מחק הכל
+      </button>
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="currentArtist">
+        <h4>Artist</h4>
+        <div>
+          <label><strong>Name:</strong></label> {{ currentArtist.name }}
+        </div>
+        <div>
+          <label><strong>Year Of Birth:</strong></label>
+          {{ currentArtist.yearOfBirth }}
+        </div>
+        <div>
+          <label><strong>pictureLink:</strong></label>
+          {{ currentArtist.pictureLink }}
+        </div>
+  
+        <a class="badge badge-warning" routerLink="/artists/{{ currentArtist.id }}">
+          Edit
+        </a>
+      </div>
+  
+      <div *ngIf="!currentArtist">
+        <br />
+        <p>Please click on a Tutorial...</p>
+      </div>
+    </div>
+  </div> -->

@@ -1,0 +1,59 @@
+<div style="width: 400px; margin: auto;">
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+
+        <div class="form-group">
+            <label for="artist-id">Artist ID</label>
+            <input
+              type="text"
+              class="form-control"
+              id="artist-id"
+              required
+              [(ngModel)]="artist.id"
+              name="artist-id"
+            />
+          </div>
+
+        <div class="form-group">
+          <label for="artist-name">Artist Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="artist-name"
+            required
+            [(ngModel)]="artist.name"
+            name="artist-name"
+          />
+        </div>
+  
+        <div class="form-group">
+          <label for="year-of-birth">Year Of Birth</label>
+          <input
+            class="form-control"
+            id="year-of-birth"
+            required
+            [(ngModel)]="artist.yearOfBirth"
+            name="year-of-birth"
+          />
+        </div>
+
+        <div class="form-group">
+            <label for="picture-link">Picture Link</label>
+            <input
+              class="form-control"
+              id="picture-link"
+              required
+              [(ngModel)]="artist.pictureLink"
+              name="picture-link"
+            />
+          </div>
+  
+        <button (click)="saveArtist()" class="btn btn-success">Submit</button>
+      </div>
+  
+      <div *ngIf="submitted">
+        <h4>You submitted successfully!</h4>
+        <button class="btn btn-success" (click)="newArtist()">Add</button>
+      </div>
+    </div>
+  </div>
